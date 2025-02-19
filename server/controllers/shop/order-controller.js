@@ -28,8 +28,8 @@ const createOrder = async (req, res) => {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: 'http://localhost:5173/shop/paypal-return', // Change the URL to your success page
-      cancel_url: 'http://localhost:5173/shop/paypal-cancel', // Change the URL to your cancel page
+      success_url: 'https://urbanvibe-frontend.onrender.com/shop/home', // success means redirects to home
+      cancel_url: 'https://urbanvibe-frontend.onrender.com/shop/checkout', // cancelled so redirect to again checkout
     });
 
     // Create a new order in your database
@@ -39,13 +39,13 @@ const createOrder = async (req, res) => {
       cartItems,
       addressInfo,
       orderStatus,
-      paymentMethod: 'Stripe', // Payment method is now Stripe
-      paymentStatus:"success",
+      paymentMethod: 'Stripe', // Payment method is Stripe
+      paymentStatus,
       totalAmount,
       orderDate,
       orderUpdateDate,
       paymentId: session.id, // Use the Stripe session ID as paymentId
-      payerId: null, // Stripe doesn't return payerId like PayPal
+      payerId: null, 
     });
 
     await newlyCreatedOrder.save();
